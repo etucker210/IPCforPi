@@ -4,7 +4,7 @@
  *
  * Author: Elijah A. Tucker
  *
- * 
+ *
  ******************************************************************************/
 
  #include <stdio.h>
@@ -25,9 +25,9 @@ int main(int argc, char const *argv[]) {
   struct sockaddr_in serv_addr, cli_addr;
   int n;
 
-  if (argc < 2)
+  if (argc > 1)
   {
-    fprintf(stderr, "ERROR, no port povided\n");
+    fprintf(stderr, "ERROR, on command line\n");
     exit(1);
   }
 
@@ -40,7 +40,7 @@ int main(int argc, char const *argv[]) {
 
   bezero((char *) &serv_addr, sizeof(serv_addr));
 
-  portno = atoi(argv[1]);
+  portno = 31415;
 
   serv_addr.sin_family = AF_INET;
   serv_addr.sin_addr.s_addr = INADDR_ANY;

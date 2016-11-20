@@ -29,13 +29,13 @@ int main(int argc, char const *argv[])
 
   char buffer[256];
 
-  if (argc < 3)
+  if (argc > 1)
   {
-    fprintf(stderr, "usage %s hostname port\n", argv[0]);
+    fprintf(stderr, "ERROR: on command line");
     exit(0);
   }
 
-  portno = atoi(argv[2]);
+  portno = 31415;
 
   sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -44,7 +44,7 @@ int main(int argc, char const *argv[])
     error("ERROR opening socket");
   }
 
-  server = gethostbyname(argv[1]);
+  server = gethostbyname("127.0.0.0");
 
   if ( server == NULL )
   {
@@ -52,7 +52,7 @@ int main(int argc, char const *argv[])
     exit(0);
   }
 
-  
+
 
   return 0;
 }
