@@ -5,6 +5,10 @@
  * Author: Elijah A. Tucker
  *
  *
+ *
+ * This code was addapted from the socket code found on
+ * http://www.cs.rpi.edu/~moorthy/Courses/os98/Pgms/socket.html
+ *
  ******************************************************************************/
 
 #include <stdio.h>
@@ -31,7 +35,7 @@ int main(int argc, char const *argv[])
 
   if (argc > 1)
   {
-    fprintf(stderr, "ERROR: on command line");
+    fprintf(stderr, "ERROR: on command line\n");
     exit(0);
   }
 
@@ -41,7 +45,7 @@ int main(int argc, char const *argv[])
 
   if (sockfd < 0 )
   {
-    error("ERROR opening socket");
+    error("ERROR opening socket to server\n");
   }
 
   server = gethostbyname("127.0.0.0");
@@ -52,7 +56,41 @@ int main(int argc, char const *argv[])
     exit(0);
   }
 
+  bezero((char *) &serv_addr, sizeof(serv_addr));
+  serv_addr.sin_family = AF_INET;
 
+  bcopy((char *) server->h_addr,
+        (char *) &serv_addr.sin_addr.saddr,
+        server->h_length);
+
+  serv_addr.sin_port = htons(portno);
+
+  if (connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0)
+  {
+    error("ERROR connecting");
+  }
+
+  printf("Please enter the message: ");
+
+  bezero(buffer, 256);
+  fgets(buffer, 255, stdin);
+
+  n = write(sockfd, buffer, strlen(buffer));
+
+  if ( n < 0 )
+  {
+    error("ERROR writing to socket");
+  }
+
+  bezero(buffer, 256);
+  n = read(sockfd, buffer, 255);
+
+  if ( n < 0 )
+  {
+    error("ERROR reading from socket");
+  }
+
+  printf("%s\n", buffer);
 
   return 0;
 }

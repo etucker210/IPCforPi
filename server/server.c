@@ -5,6 +5,9 @@
  * Author: Elijah A. Tucker
  *
  *
+ * This code was addapted from the socket code found on
+ * http://www.cs.rpi.edu/~moorthy/Courses/os98/Pgms/socket.html
+ *
  ******************************************************************************/
 
  #include <stdio.h>
@@ -48,7 +51,7 @@ int main(int argc, char const *argv[]) {
 
   if( bind(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0 )
   {
-    error("ERROR on binding");
+    error("ERROR on binding to the socket to the client");
   }
 
   listen(sockfd, 5);
@@ -59,7 +62,7 @@ int main(int argc, char const *argv[]) {
 
   if (newsockfd < 0 )
   {
-    error("ERROR on accept");
+    error("ERROR on accepting the socket from the client");
   }
 
   bezero(buffer, 256);
@@ -68,7 +71,7 @@ int main(int argc, char const *argv[]) {
 
   if ( n < 0 )
   {
-    error("ERROR reading from socket");
+    error("ERROR reading from socket from client");
   }
 
   printf("Here is your message : %s\n", buffer);
@@ -77,7 +80,7 @@ int main(int argc, char const *argv[]) {
 
   if ( n < 0 )
   {
-    error("ERROR writing to socket");
+    error("ERROR writing to socket to client");
   }
 
   return 0;
