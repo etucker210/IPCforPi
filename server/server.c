@@ -15,13 +15,13 @@
  #include <sys/socket.h>
  #include <netinet/in.h>
 
-void error( char * msg )
+void error( char *msg )
 {
-  perror(meg);
+  perror(msg);
   exit(1);
 }
 
-int main(int argc, char const * argv[]) {
+int main(int argc, char const *argv[]) {
 
   int sockfd, newsockfd, portno, clilen;
   char buffer[256];
