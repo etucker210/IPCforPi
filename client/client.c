@@ -32,6 +32,7 @@ int main(int argc, char const *argv[])
   struct hostent *server;
 
   char buffer[256];
+  char ipAddr[16];
 
   if (argc > 1)
   {
@@ -41,6 +42,10 @@ int main(int argc, char const *argv[])
 
   portno = 31415;
 
+  printf("Enter the server IP Address: ");
+  bezero(ipAddr, 16);
+  fgets(ipAddr, 15, stdin);
+
   sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
   if (sockfd < 0 )
@@ -48,7 +53,7 @@ int main(int argc, char const *argv[])
     error("ERROR opening socket to server\n");
   }
 
-  server = gethostbyname("127.0.0.0");
+  server = gethostbyname(ipAddr);
 
   if ( server == NULL )
   {
