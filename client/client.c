@@ -43,7 +43,7 @@ int main(int argc, char const *argv[])
   portno = 31415;
 
   printf("Enter the server IP Address: ");
-  bezero(ipAddr, 16);
+  bzero(ipAddr, 16);
   fgets(ipAddr, 15, stdin);
 
   sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -61,7 +61,7 @@ int main(int argc, char const *argv[])
     exit(0);
   }
 
-  bezero((char *) &serv_addr, sizeof(serv_addr));
+  bzero((char *) &serv_addr, sizeof(serv_addr));
   serv_addr.sin_family = AF_INET;
 
   bcopy((char *) server->h_addr,
@@ -77,7 +77,7 @@ int main(int argc, char const *argv[])
 
   printf("Please enter the message: ");
 
-  bezero(buffer, 256);
+  bzero(buffer, 256);
   fgets(buffer, 255, stdin);
 
   n = write(sockfd, buffer, strlen(buffer));
@@ -87,7 +87,7 @@ int main(int argc, char const *argv[])
     error("ERROR writing to socket");
   }
 
-  bezero(buffer, 256);
+  bzero(buffer, 256);
   n = read(sockfd, buffer, 255);
 
   if ( n < 0 )

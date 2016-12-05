@@ -41,7 +41,7 @@ int main(int argc, char const *argv[]) {
     error("ERROR opening socket");
   }
 
-  bezero((char *) &serv_addr, sizeof(serv_addr));
+  bzero((char *) &serv_addr, sizeof(serv_addr));
 
   portno = 31415;
 
@@ -65,7 +65,7 @@ int main(int argc, char const *argv[]) {
     error("ERROR on accepting the socket from the client");
   }
 
-  bezero(buffer, 256);
+  bzero(buffer, 256);
 
   n = read(newsockfd, buffer, 255);
 
