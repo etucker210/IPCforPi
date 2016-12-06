@@ -53,7 +53,7 @@ int main(int argc, char const *argv[])
     error("ERROR opening socket to server\n");
   }
 
-  server = gethostbyname(ipAddr);
+  server = inet_addr(ipAddr);
 
   if ( server == NULL )
   {
