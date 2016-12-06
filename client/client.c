@@ -44,7 +44,7 @@ int main(int argc, char const *argv[])
 
   printf("Enter the server IP Address: ");
   bzero(ipAddr, 16);
-  fgets(&ipAddr, 15, stdin);
+  scanf("%s", &ipAddr);
 
   sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
