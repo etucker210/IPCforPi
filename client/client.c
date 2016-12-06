@@ -43,7 +43,7 @@ int main(int argc, char const *argv[])
   portno = 31415;
 
   printf("Enter the server IP Address: ");
-  bzero(ipAddr, 16);
+  //bzero(ipAddr, 16);
   scanf("%s", &ipAddr);
 
   sockfd = socket(AF_INET, SOCK_STREAM, 0);
